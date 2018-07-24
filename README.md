@@ -1,6 +1,7 @@
 # todo-app
 
-> Vue To Do App
+This is my learning to do app for vue js
+
 
 ## Build Setup
 
