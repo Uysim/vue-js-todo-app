@@ -5,7 +5,7 @@
         {{ todo.title }}
       </div>
       <div class='meta'>
-        {{ todo.project }}
+        {{ todo.note }}
       </div>
       <div class='extra content'>
         <a class='right floated trash icon' v-on:click='deleteTodo(index)'>
@@ -28,30 +28,30 @@
         </div>
         <div class='field'>
           <label>
-            Project
+            Note
           </label>
-          <input type="text" v-model="todo.project">
+          <input type="text" v-model="todo.note">
         </div>
         <div class='ui two button attached buttons'>
-          <button class='ui basic blue button' v-on:click='hideForm'>
+          <button class='ui basic basic button' v-on:click='hideForm'>
             Close X
           </button>
         </div>
       </div>
     </div>
 
-    <div class='ui buttom attached green basic button' v-show='!isEditing && todo.done'>
+    <button class='ui buttom attached green basic button' v-show='!isEditing && todo.done' v-on:click='completeTodo(index)'>
       Completed
-    </div>
-    <div class='ui buttom attached red basic button' v-show='!isEditing && !todo.done'>
+    </button>
+    <button class='ui buttom attached red basic button' v-show='!isEditing && !todo.done' v-on:click='completeTodo(index)'>
       Pending
-    </div>
+    </button>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['todo'],
+  props: ['todo', 'index'],
   data () {
     return {
       isEditing: false
@@ -66,6 +66,9 @@ export default {
     },
     hideForm() {
       this.isEditing = false;
+    },
+    completeTodo(index){
+      this.$emit('complete-todo', index);
     }
   }
 }
